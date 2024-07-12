@@ -1,4 +1,3 @@
----
 # Source: prometheus/templates/server/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
@@ -11,8 +10,7 @@ metadata:
     heritage: Helm
   name: prometheus
   namespace: istio-system
-  annotations:
-    {}
+  annotations: {}
 ---
 # Source: prometheus/templates/server/cm.yaml
 apiVersion: v1
@@ -313,7 +311,6 @@ data:
         - __meta_filepath
       - replacement: /stats/prometheus
         target_label: __metrics_path__
-
   recording_rules.yml: |
     {}
   rules: |
@@ -360,7 +357,7 @@ rules:
     verbs:
       - get
   - apiGroups:
-    - "networking.istio.io"
+      - "networking.istio.io"
     verbs:
       - get
       - watch
@@ -447,9 +444,9 @@ spec:
   template:
     metadata:
       annotations:
-        traffic.sidecar.istio.io/includeInboundPorts: ""   # do not intercept any inbound ports
-        traffic.sidecar.istio.io/includeOutboundIPRanges: ""  # do not intercept any outbound traffic
-        proxy.istio.io/config: |  # configure an env variable `OUTPUT_CERTS` to write certificates to the given folder
+        traffic.sidecar.istio.io/includeInboundPorts: "" # do not intercept any inbound ports
+        traffic.sidecar.istio.io/includeOutboundIPRanges: "" # do not intercept any outbound traffic
+        proxy.istio.io/config: | # configure an env variable `OUTPUT_CERTS` to write certificates to the given folder
           proxyMetadata:
             OUTPUT_CERTS: /etc/istio-output-certs
         sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-output-certs"}]' # mount the shared volume at sidecar proxy
@@ -469,8 +466,7 @@ spec:
           args:
             - --volume-dir=/etc/config
             - --webhook-url=http://127.0.0.1:9090/-/reload
-          resources:
-            {}
+          resources: {}
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config
@@ -478,7 +474,6 @@ spec:
             - name: file-sd-volume
               mountPath: /etc/file_sd
               readOnly: true
-
         - name: prometheus-server
           image: "prom/prometheus:v2.24.0"
           imagePullPolicy: "IfNotPresent"
@@ -509,8 +504,7 @@ spec:
             timeoutSeconds: 10
             failureThreshold: 3
             successThreshold: 1
-          resources:
-            {}
+          resources: {}
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config
@@ -544,5 +538,4 @@ spec:
           emptyDir:
             medium: Memory
         - name: storage-volume
-          emptyDir:
-            {}
+          emptyDir: {}

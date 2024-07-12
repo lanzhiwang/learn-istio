@@ -5,8 +5,8 @@ spec:
   profile: demo
   components:
     ingressGateways:
-    - name: istio-ingressgateway
-      enabled: false
+      - name: istio-ingressgateway
+        enabled: false
     egressGateways:
-    - name: istio-egressgateway
-      enabled: false
+      - name: istio-egressgateway
+        enabled: false

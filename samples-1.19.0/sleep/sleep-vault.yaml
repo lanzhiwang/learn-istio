@@ -29,8 +29,8 @@ metadata:
     service: sleep
 spec:
   ports:
-  - port: 80
-    name: http
+    - port: 80
+      name: http
   selector:
     app: sleep
 ---
@@ -50,8 +50,9 @@ spec:
     spec:
       serviceAccountName: vault-citadel-sa
       containers:
-      - name: sleep
-        image: curlimages/curl
-        command: ["/bin/sleep", "infinity"]
-        imagePullPolicy: IfNotPresent
+        - name: sleep
+          image: curlimages/curl
+          command: ["/bin/sleep", "infinity"]
+          imagePullPolicy: IfNotPresent
 ---
+

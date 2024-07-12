@@ -26,8 +26,8 @@ spec:
   ipFamilyPolicy: RequireDualStack
   ipFamilies: [IPv6, IPv4]
   ports:
-  - port: 9080
-    name: http
+    - port: 9080
+      name: http
   selector:
     app: ratings
 ---
@@ -51,9 +51,10 @@ spec:
         version: v1
     spec:
       containers:
-      - name: ratings
-        image: docker.io/istio/examples-bookinfo-ratings-v1:1.18.0
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 9080
+        - name: ratings
+          image: docker.io/istio/examples-bookinfo-ratings-v1:1.18.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9080
 ---
+
